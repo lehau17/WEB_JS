@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    #clock {
+        display: flex;
+        width: 600px;
+        height: 600px;
+        justify-content: center;
+        align-items: center;
+        margin: auto;
+        position: relative;
+        top: 100px;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        text-align: center;
+        color: blue;
+        font-size: 30px;
+        font-style: italic;
+        border: 10px dotted rgb(212, 39, 212);
+        border-radius: 600px;
+        background-color: pink;
+    }
+    
+    #nut {
+        display: flex;
+        justify-content: center;
+        z-index: 2;
+    }
+    
+    #nuta {
+        display: inline-block;
+        background-color: yellow;
+        padding: 20px;
+        border-radius: 20px;
+        z-index: 2;
+        margin: 10px;
+        cursor: pointer;
+    }
+    
+    #nutb {
+        display: inline-block;
+        background-color: yellow;
+        padding: 20px;
+        border-radius: 20px;
+        z-index: 2;
+        margin: 10px;
+        cursor: pointer;
+    }
+</style>
+
+<body>
+    <div id="clock">Loading...</div>
+    <div id="nut">
+        <div id="nuta">Xoa</div>
+        <div id="nutb">Lammoi</div>
+    </div>
+
+</body>
+
+<script language="JavaScript">
+    var c;
+
+    function refreshClock() {
+        var d = new Date();
+        var s = d.getSeconds();
+        var m = d.getMinutes();
+        var h = d.getHours();
+        var day = d.getDay();
+        var date = d.getDate();
+        var month = d.getMonth();
+        var year = d.getFullYear();
+        var days = new Array("Chủ nhật", "Thứ hai", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7");
+        var months = new Array("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12");
+        var am_pm;
+
+        if (s < 10) {
+            s = "0" + s;
+        }
+        if (m < 10) {
+            m = "0" + m;
+        }
+
+        if (h > 12) {
+            h -= 12;
+            AM_PM = "PM";
+        } else {
+            AM_PM = "AM";
+        }
+
+        if (h < 10) {
+            h = "0" + h;
+        }
+
+        document.getElementById("clock").innerHTML = days[day] + " Ngày " +
+            date + "/" + months[month] + "/" + year + "<br>" +
+            " Bây giờ là " + " [" + h + ":" + m + ":" + s + "] " + AM_PM;
+        c = setTimeout("refreshClock()", 1000);
+    }
+    refreshClock();
+    document.getElementById("nuta").onclick = function() {
+        clearTimeout(c);
+        document.getElementById("clock").innerHTML = "Loading....."
+    }
+    document.getElementById("nutb").onclick = function() {
+        refreshClock();
+    }
+</script>
+
+</html>
